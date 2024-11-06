@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <espnow.h>
 
-// #define TRANSMITTER // Раскомментируйте для прошивки приемника
+// #define TRANSMITTER // Раскомментируйте для прошивки передатчика
 
 #define DEBUG // Проверка каналов через serial и вывод MAC-адреса приемника
 // #define DISABLE_LED  // Отключение сетодиодов на плате

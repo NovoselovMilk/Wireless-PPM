@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <espnow.h>
 
-#define TRANSMITTER // Закомментируйте для прошивки приемника
+// #define TRANSMITTER // Раскомментируйте для прошивки приемника
 
 #define DEBUG // Проверка каналов через serial и вывод MAC-адреса приемника
 // #define DISABLE_LED  // Отключение сетодиодов на плате
@@ -13,6 +13,8 @@
 
 #define PPM_FRAME 22500
 #define PPM_PULSE_WIDTH 300
+
+uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // Укажите адрес приемника
 
 volatile uint8_t channelIndex = 0;
 volatile uint32_t lastPulseTime = 0;
@@ -34,8 +36,6 @@ volatile bool pulseState = false;
 uint32_t last_receive = 0;
 bool connect = false;
 #endif
-
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // Укажите адрес приемника
 
 void printInfo();
 void IRAM_ATTR generatePPM();
@@ -211,7 +211,7 @@ void IRAM_ATTR generatePPM()
       else
       {
         channelIndex = 0;
-        timer1_write((PPM_FRAME - (summChannelWidthChannelWidth + PPM_PULSE_WIDTH)) * 5);
+        timer1_write((PPM_FRAME - (summChannelWidth + PPM_PULSE_WIDTH)) * 5);
         summChannelWidth = 0;
       }
     }
